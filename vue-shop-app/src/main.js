@@ -6,14 +6,16 @@ import 'vant/lib/index.css';
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import baseURL from "./store/baseURL"
+import axios from "axios"
+axios.defaults.baseURL = "http://localhost:3009/"
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
-// Vue.prototype.FACTURL = baseURL
 Vue.use(VueI18n) // 通过插件的形式挂载
 
 Vue.use(Vant);
 
 Vue.config.productionTip = false
+vue.prototype.$addr = axios
 
 new Vue({
   router,

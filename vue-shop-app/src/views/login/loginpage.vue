@@ -158,16 +158,12 @@ export default {
       console.log(file);
       const formData = new FormData();
       formData.append("file", file.file);
-      axios
-        .post(
-          "http://api.cat-shop.penkuoer.com:3009/api/v1/common/file_upload",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data" // 设置请求头传递二进制文件
-            }
+      this.$addr
+        .post("/api/v1/common/file_upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data" // 设置请求头传递二进制文件
           }
-        )
+        })
         .then(res => {
           this.avatar = res.data.info;
           console.log(res);
@@ -179,8 +175,8 @@ export default {
         if (/^[\w]{6,12}$/.test(this.zcpassword)) {
           if (this.checked) {
             if (this.zcnickName != "") {
-              axios
-                .post("http://api.cat-shop.penkuoer.com/api/v1/auth/reg", {
+              this.$addr
+                .post("/api/v1/auth/reg", {
                   userName: this.zcphone,
                   password: this.zcpassword,
                   nickName: this.zcnickName,
@@ -215,7 +211,7 @@ export default {
     login() {
       this.isSendYZ = false;
       if (this.yanzheng) {
-        axios
+        this.$addr
           .post("http://api.cat-shop.penkuoer.com/api/v1/auth/login", {
             userName: this.phone,
             password: this.password
